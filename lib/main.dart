@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_components/painter/dotted_circle_widget.dart';
+import 'package:ui_components/painters/dotted_circle_widget.dart';
 
 void main() {
   runApp(const CustomUIComponents());

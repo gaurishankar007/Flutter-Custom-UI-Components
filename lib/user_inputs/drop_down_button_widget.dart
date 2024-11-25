@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../text/text_widget.dart';
+import '../visual_layouts/text/text_widget.dart';
 
-class DropDownWidget<T> extends StatelessWidget {
+class DropDownButtonWidget<T> extends StatelessWidget {
   final T? selectedValue;
   final List<DropDownItem> items;
   final Function(T?)? onChanged;
 
-  const DropDownWidget({
+  const DropDownButtonWidget({
     super.key,
     required this.selectedValue,
     required this.items,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../animation/explicit/loading_circle_widget.dart';
-import '../text/text_widget.dart';
+import '../animations/explicit/loading_circle_widget.dart';
+import '../visual_layouts/text/text_widget.dart';
 
 class ButtonWidget extends HookWidget {
   final double? height;
