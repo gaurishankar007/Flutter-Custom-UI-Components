@@ -4,7 +4,7 @@ import '../visual_layouts/text/text_widget.dart';
 
 class DropDownButtonWidget<T> extends StatelessWidget {
   final T? selectedValue;
-  final List<DropDownItem> items;
+  final List<DropdownItem<T>> items;
   final Function(T?)? onChanged;
 
   const DropDownButtonWidget({
@@ -40,11 +40,11 @@ class DropDownButtonWidget<T> extends StatelessWidget {
           dropdownColor: Colors.white,
           borderRadius: BorderRadius.circular(12),
           items: items.map<DropdownMenuItem<T>>(
-            (DropDownItem dropDownValue) {
+            (dropDownItem) {
               return DropdownMenuItem<T>(
-                value: dropDownValue.value,
+                value: dropDownItem.value,
                 child: TextWidget(
-                  dropDownValue.text,
+                  dropDownItem.label,
                   overflow: TextOverflow.ellipsis,
                   fontWeight: FontWeight.w500,
                 ),
@@ -59,12 +59,26 @@ class DropDownButtonWidget<T> extends StatelessWidget {
 
 /// Holds dropdown visible text and value associated with it.
 /// Value will be returned on changing dropdown item.
-class DropDownItem<T> {
+/// [label] is the text which will be displayed.
+class DropdownItem<T> {
   final T? value;
-  final String text;
+  final String label;
 
-  const DropDownItem({
+  const DropdownItem({
     required this.value,
-    required this.text,
+    required this.label,
   });
+
+  @override
+  String toString() => 'DropDownItem(value: $value, label: $label)';
+
+  @override
+  bool operator ==(covariant DropdownItem<T> other) {
+    if (identical(this, other)) return true;
+
+    return other.value == value && other.label == label;
+  }
+
+  @override
+  int get hashCode => value.hashCode ^ label.hashCode;
 }
