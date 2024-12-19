@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../visual_layouts/text/text_widget.dart';
+
 /// The [width] of the dropdown menu will also decide
 /// the width of the popup container.
-class DropDownMenuWidget<T> extends StatelessWidget {
+class DropdownMenuWidget<T> extends StatelessWidget {
   final double? width;
-  final Widget? label;
+  final String? label;
   final String? hintText;
   final bool enableFilter;
   final bool enableSearch;
@@ -15,7 +17,7 @@ class DropDownMenuWidget<T> extends StatelessWidget {
   final SearchCallback<T>? searchCallback;
   final List<DropdownMenuEntry<T>> entries;
 
-  const DropDownMenuWidget({
+  const DropdownMenuWidget({
     super.key,
     this.width,
     this.label,
@@ -36,7 +38,7 @@ class DropDownMenuWidget<T> extends StatelessWidget {
       alignedDropdown: true,
       child: DropdownMenu<T>(
         width: width,
-        label: label,
+        label: label != null ? TextWidget(label!) : null,
         hintText: hintText,
         enableFilter: enableFilter,
         enableSearch: enableSearch,
@@ -73,30 +75,4 @@ class DropDownMenuWidget<T> extends StatelessWidget {
       ),
     );
   }
-}
-
-/// Holds dropdown visible text and value associated with it.
-/// Value will be returned on changing dropdown item.
-/// [label] is the text which will be displayed.
-class DropDownEntry<T> {
-  final T value;
-  final String label;
-
-  const DropDownEntry({
-    required this.value,
-    required this.label,
-  });
-
-  @override
-  String toString() => 'DropDownItem(value: $value, label: $label)';
-
-  @override
-  bool operator ==(covariant DropDownEntry<T> other) {
-    if (identical(this, other)) return true;
-
-    return other.value == value && other.label == label;
-  }
-
-  @override
-  int get hashCode => value.hashCode ^ label.hashCode;
 }

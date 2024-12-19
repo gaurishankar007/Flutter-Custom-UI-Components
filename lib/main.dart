@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'user_inputs/drop_down_menu_widget.dart';
+import 'user_inputs/drop_down_bottom_sheet_widget.dart';
 
 void main() {
   runApp(const CustomUIComponents());
@@ -28,18 +28,15 @@ class CustomUIComponents extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(width: double.maxFinite, height: 10),
-              DropDownMenuWidget(
-                width: MediaQuery.of(context).size.width - 40,
-                enableFilter: false,
-                controller: TextEditingController(),
-                initialSelection: 1,
-                entries: const [
-                  DropdownMenuEntry(value: 0, label: "Unknown"),
-                  DropdownMenuEntry(value: 1, label: "White"),
-                  DropdownMenuEntry(value: 2, label: "Black"),
-                  DropdownMenuEntry(value: 3, label: "Red"),
+              DropdownBottomSheetWidget(
+                title: "Select a color",
+                items: const [
+                  DropdownItem(value: 0, label: "Unknown"),
+                  DropdownItem(value: 1, label: "White"),
+                  DropdownItem(value: 2, label: "Black"),
+                  DropdownItem(value: 3, label: "Red"),
                 ],
-                onSelected: (value) {},
+                onChanged: (value) {},
               ),
             ],
           ),
