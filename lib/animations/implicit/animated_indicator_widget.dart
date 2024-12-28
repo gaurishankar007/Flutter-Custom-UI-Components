@@ -36,6 +36,9 @@ class AnimatedIndicatorWidget extends StatefulWidget {
   /// space between the indicators
   final double spacing;
 
+  /// Makes the style of previous and current index same
+  final bool isProgressIndicator;
+
   const AnimatedIndicatorWidget({
     super.key,
     required this.length,
@@ -49,6 +52,7 @@ class AnimatedIndicatorWidget extends StatefulWidget {
     this.inActiveBorderRadius,
     this.activeBorderRadius,
     this.spacing = 5,
+    this.isProgressIndicator = false,
   });
 
   @override
@@ -112,20 +116,18 @@ class _AnimatedIndicatorWidgetState extends State<AnimatedIndicatorWidget> {
         itemCount: widget.length,
         separatorBuilder: (context, index) => SizedBox(width: widget.spacing),
         itemBuilder: (context, index) {
-          Color color = inActiveColor;
-          double? newWidth = widget.width;
-          double? newHeight = widget.height;
-          BorderRadius? borderRadius = widget.inActiveBorderRadius ??
-              BorderRadius.circular(widget.height);
+          bool isActive = widget.isProgressIndicator
+              ? index <= selectedIndex
+              : index == selectedIndex;
 
-          // If it is the active index
-          if (selectedIndex == index) {
-            color = activeColor;
-            newWidth = widget.activeWidth;
-            newHeight = widget.activeHeight;
-            borderRadius = widget.activeBorderRadius ??
-                BorderRadius.circular(widget.activeHeight);
-          }
+          Color color = isActive ? activeColor : inActiveColor;
+          double? newWidth = isActive ? widget.activeWidth : widget.width;
+          double? newHeight = isActive ? widget.activeHeight : widget.height;
+          BorderRadius? borderRadius = isActive
+              ? (widget.activeBorderRadius ??
+                  BorderRadius.circular(widget.activeHeight))
+              : (widget.inActiveBorderRadius ??
+                  BorderRadius.circular(widget.height));
 
           return Center(
             child: AnimatedContainer(

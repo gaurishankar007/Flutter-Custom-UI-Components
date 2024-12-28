@@ -6,6 +6,7 @@ class IconButtonWidget extends StatelessWidget {
   final EdgeInsets? padding;
   final VisualDensity? visualDensity;
   final bool disableSplash;
+  final double? targetSize;
   final double? containerSize;
   final Color? containerColor;
 
@@ -16,6 +17,7 @@ class IconButtonWidget extends StatelessWidget {
     this.padding,
     this.visualDensity,
     this.disableSplash = false,
+    this.targetSize,
     this.containerSize,
     this.containerColor,
   });
@@ -32,6 +34,12 @@ class IconButtonWidget extends StatelessWidget {
     );
 
     if (disableSplash) child = noSplashWidget(child);
+    if (targetSize != null) {
+      child = SizedBox.square(
+        dimension: targetSize,
+        child: child,
+      );
+    }
     if (containerSize != null) child = containerWidget(child);
 
     return child;

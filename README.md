@@ -17,6 +17,7 @@ Bring your UI to life with smooth animations:
 - **Implicit Animations**:
   - ✅ **Animated Indicator**
   - ✅ **Resend OTP Button**
+  - ✅ **Tab Bar**
 
 ---
 
@@ -34,6 +35,7 @@ Custom-shaped widgets for creative designs:
 Draw custom shapes with ease:
 
 - ✅ **Dotted Circle**
+- ✅ **Dotted Container**
 - ✅ **Polygon**
 
 ---
