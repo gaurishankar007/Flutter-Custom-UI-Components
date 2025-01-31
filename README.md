@@ -44,12 +44,25 @@ Draw custom shapes with ease:
 
 Enhance your UI with foundational layout elements:
 
+- ✅ **Document**
+  - ✅ **Document Upload**: Select and upload images, pdf, and other files
+  - ✅ **Document List**: List out images, pdf, and other files in the same list view
+  - ✅ **Document BottomSheet**: View tapped document in modal bottom sheet
+- ✅ **Image**
+  - ✅ **Asset Image**
+  - ✅ **Cached Network Image**
+  - ✅ **File Image**
+  - ✅ **Memory Image**
+  - ✅ **Network Image**
 - **Text**:
   - ✅ **Text Type**
   - ✅ **Text**
-- ✅ **Image**
+- ✅ **Cupertino Loading**
+- ✅ **Error Indicator**
+- ✅ **Keyboard Space**
 - ✅ **Loading Circle**
 - ✅ **Shimmer**
+- ✅ **Stopwatch**
 
 ---
 

@@ -22,13 +22,13 @@ class ShimmerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: baseColor ?? Colors.grey.withOpacity(.5),
-      highlightColor: highlightColor ?? Colors.grey.withOpacity(.3),
+      baseColor: baseColor ?? Colors.grey.withAlpha(125),
+      highlightColor: highlightColor ?? Colors.grey.withAlpha(75),
       child: Container(
         width: width,
         height: height,
         decoration: BoxDecoration(
-          color: containerColor ?? Colors.grey.withOpacity(.5),
+          color: containerColor ?? Colors.grey.withAlpha(125),
           borderRadius: borderRadius,
         ),
       ),

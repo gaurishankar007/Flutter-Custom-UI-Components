@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'user_inputs/drop_down_bottom_sheet_widget.dart';
+import 'widgets/user_inputs/drop_down_bottom_sheet_widget.dart';
 
 void main() {
   runApp(const CustomUIComponents());
