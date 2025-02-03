@@ -1,25 +1,6 @@
 part of 'document_data.dart';
 
-/// Image document's data holder
-class DocumentImageData extends DocumentData {
-  DocumentImageData({
-    super.url,
-    super.uint8List,
-    super.base64Data,
-    super.file,
-  });
-
-  @override
-  Widget build({
-    double? height,
-    double? width,
-    BoxFit? fit,
-    BorderRadius? borderRadius,
-  }) =>
-      SizedBox.shrink();
-}
-
-class ImageNetworkData extends DocumentImageData {
+class ImageNetworkData extends DocumentData {
   ImageNetworkData({
     required String url,
   }) : super(url: url);
@@ -41,7 +22,7 @@ class ImageNetworkData extends DocumentImageData {
   }
 }
 
-class ImageFileData extends DocumentImageData {
+class ImageFileData extends DocumentData {
   ImageFileData({
     required File assetFile,
   }) : super(file: assetFile);
@@ -63,10 +44,10 @@ class ImageFileData extends DocumentImageData {
   }
 }
 
-class ImageMemoryData extends DocumentImageData {
+class ImageMemoryData extends DocumentData {
   ImageMemoryData({
-    required String base64Data,
-  }) : super(base64Data: base64Data);
+    required Uint8List uint8List,
+  }) : super(uint8List: uint8List);
 
   @override
   Widget build({
@@ -75,12 +56,12 @@ class ImageMemoryData extends DocumentImageData {
     BoxFit? fit,
     BorderRadius? borderRadius,
   }) {
-    if (base64Data?.isNotEmpty != true) {
+    if (uint8List?.isNotEmpty != true) {
       return ErrorIndicatorWidget(dimension: height, iconSize: 64);
     }
 
     return ImageMemoryWidget(
-      base64: base64Data!,
+      uint8List: uint8List!,
       height: height,
       width: width,
       fit: fit,

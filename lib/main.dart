@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'widgets/user_inputs/drop_down_bottom_sheet_widget.dart';
+import 'package:ui_components/widgets/clippers/half_circle_widget.dart';
 
 void main() {
   runApp(const CustomUIComponents());
@@ -28,15 +27,18 @@ class CustomUIComponents extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(width: double.maxFinite, height: 10),
-              DropdownBottomSheetWidget(
-                title: "Select a color",
-                items: const [
-                  DropdownItem(value: 0, label: "Unknown"),
-                  DropdownItem(value: 1, label: "White"),
-                  DropdownItem(value: 2, label: "Black"),
-                  DropdownItem(value: 3, label: "Red"),
-                ],
-                onChanged: (value) {},
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                ),
+                child: ClipPath(
+                  clipper: HalfCircleClipper(side: CircleSide.left),
+                  child: Container(
+                    height: 200,
+                    width: 200,
+                    color: Colors.amber,
+                  ),
+                ),
               ),
             ],
           ),

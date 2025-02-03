@@ -1,19 +1,14 @@
-import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
 import '../../../utils/ui_helper.dart';
+import '../cupertino_loading_widget.dart';
 import '../error_indicator_widget.dart';
-
 
 class ImageMemoryWidget extends StatelessWidget {
   /// image bytes data
-  final Uint8List? uint8List;
-
-  /// encoded image data
-  final String? base64;
-
+  final Uint8List uint8List;
   final double? height;
   final double? width;
   final int? cacheHeight;
@@ -24,8 +19,7 @@ class ImageMemoryWidget extends StatelessWidget {
 
   const ImageMemoryWidget({
     super.key,
-    this.uint8List,
-    this.base64,
+    required this.uint8List,
     this.height,
     this.width,
     this.cacheHeight,
@@ -37,15 +31,19 @@ class ImageMemoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (base64 == null && uint8List == null) return UIHelper.nothing;
+    if (uint8List.isEmpty) return UIHelper.nothing;
 
     Widget child = Image.memory(
-      _getImageBytes(),
+      uint8List,
       height: height,
       width: width,
       cacheHeight: cacheHeight,
       cacheWidth: cacheWidth,
       fit: fit,
+      frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+        if (frame != null) return child;
+        return CupertinoLoadingWidget(dimension: height);
+      },
       errorBuilder: (_, __, ___) => const ErrorIndicatorWidget(),
     );
 
@@ -59,17 +57,5 @@ class ImageMemoryWidget extends StatelessWidget {
     }
 
     return child;
-  }
-
-  Uint8List _getImageBytes() {
-    if (uint8List?.isNotEmpty == true) {
-      return uint8List!;
-    } else if (base64?.isNotEmpty == true) {
-      try {
-        return base64Decode(base64!);
-      } catch (_) {}
-    }
-
-    return Uint8List.fromList([]);
   }
 }

@@ -39,6 +39,9 @@ class UIHelper {
   /// Horizontal Space = 12
   static final smallHSpace = SizedBox(width: Space.small.value);
 
+  /// Horizontal Space = 16
+  static final sMediumHSpace = SizedBox(width: Space.sMedium.value);
+
   /// Horizontal Space = 20
   static final mediumHSpace = SizedBox(width: Space.medium.value);
 
@@ -122,6 +125,10 @@ class UIHelper {
   /// Vertical Padding = 24
   static final largeVPadding =
       EdgeInsets.symmetric(vertical: Space.large.value);
+
+  /// Vertical Padding = 28
+  static final xLargeVPadding =
+      EdgeInsets.symmetric(vertical: Space.xLarge.value);
 
   //<========== Symmetric Padding ==========>
   /// Symmetric Padding = 8 horizontal, 4 vertical

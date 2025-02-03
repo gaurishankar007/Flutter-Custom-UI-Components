@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+import '../cupertino_loading_widget.dart';
 import '../error_indicator_widget.dart';
 
 class ImageFileWidget extends StatelessWidget {
@@ -35,6 +36,10 @@ class ImageFileWidget extends StatelessWidget {
       cacheHeight: cacheHeight,
       cacheWidth: cacheWidth,
       fit: fit,
+      frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+        if (frame != null) return child;
+        return CupertinoLoadingWidget(dimension: height);
+      },
       errorBuilder: (_, __, ___) => const ErrorIndicatorWidget(),
     );
 

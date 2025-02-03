@@ -26,6 +26,7 @@ Bring your UI to life with smooth animations:
 Custom-shaped widgets for creative designs:
 
 - ✅ **Circle**
+- ✅ **Curve**
 - ✅ **Half Circle**
 
 ---
@@ -44,17 +45,20 @@ Draw custom shapes with ease:
 
 Enhance your UI with foundational layout elements:
 
-- ✅ **Document**
+- **Document**
   - ✅ **Document Upload**: Select and upload images, pdf, and other files
   - ✅ **Document List**: List out images, pdf, and other files in the same list view
   - ✅ **Document BottomSheet**: View tapped document in modal bottom sheet
-- ✅ **Image**
+- **Image**
   - ✅ **Asset Image**
   - ✅ **Cached Network Image**
   - ✅ **File Image**
   - ✅ **Memory Image**
   - ✅ **Network Image**
-- **Text**:
+- **PDF**
+  - ✅ **File PDF**
+  - ✅ **Memory PDF**
+- **Text**
   - ✅ **Text Type**
   - ✅ **Text**
 - ✅ **Cupertino Loading**
@@ -76,6 +80,7 @@ Intuitive and interactive components for user input:
 - ✅ **Drop Down Button**
 - ✅ **Drop Down Menu**
 - ✅ **Icon Button**
+- ✅ **OTP Form**
 - ✅ **Text Button**
 - ✅ **Text Field**
 
