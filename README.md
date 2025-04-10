@@ -1,6 +1,6 @@
 # Flutter Reusable UI Components 🎨
 
-A Flutter project showcasing a library of reusable custom widgets to accelerate UI development and maintain design consistency across projects.
+A Flutter project showcasing a library of reusable custom widgets to accelerate UI development and maintain design consistency across projects. [Learn about most commonly used handy Flutter widgets.](./flutter_cheat_sheet.md)
 
 ## Table of Contents 📌
 
