@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../visual_layouts/text/text_widget.dart';
+import '../../visual_layouts/text/text_widget.dart';
 
 /// The [width] of the dropdown menu will also decide
 /// the width of the popup container.

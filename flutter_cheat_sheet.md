@@ -12,7 +12,7 @@ Gives you a basic app layout to start with:
 - ✅ **Scaffold**: Provides a default app structure.
 - ✅ **SafeArea**: Ensures content is displayed within safe, visible areas.
 - ✅ **AppBar**: Displays a header with title and actions.  
-  **FloatingActionButton**: Adds a floating button for primary actions.
+- ✅ **FloatingActionButton**: Adds a floating button for primary actions.
 - ✅ **NavigationBar** & **BottomNavigationBar**: For navigation between major sections.
 - ✅ **TabBarView** with **TabBar** and **DefaultTabController**: For tabbed navigation.
 - ✅ **PageView**: Swiping between pages.

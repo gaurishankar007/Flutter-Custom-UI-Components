@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../visual_layouts/text/text_widget.dart';
+import '../../visual_layouts/text/text_widget.dart';
 
 class DropDownButtonWidget<T> extends StatelessWidget {
   final T? selectedValue;
@@ -33,7 +33,7 @@ class DropDownButtonWidget<T> extends StatelessWidget {
             Icons.keyboard_arrow_down,
             color: Colors.black,
           ),
-          iconEnabledColor: Colors.black.withOpacity(.6),
+          iconEnabledColor: Colors.black.withAlpha(153),
           iconSize: 25,
           underline: const SizedBox(),
           onChanged: onChanged,

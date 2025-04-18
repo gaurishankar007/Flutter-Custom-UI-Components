@@ -88,13 +88,17 @@ Enhance your UI with foundational layout elements:
 Intuitive and interactive components for user input:
 
 - ✅ **Bottom Sheet**
-- ✅ **Button**
-- ✅ **Drop Down Bottom Sheet**
-- ✅ **Drop Down Button**
-- ✅ **Drop Down Menu**
-- ✅ **Icon Button**
+- **Button**
+  - ✅ **Icon Button**
+  - ✅ **Link Button**
+  - ✅ **Primary Button**
+  - ✅ **Secondary Button**
+  - ✅ **Text Button**
+- **Dropdown**
+  - ✅ **Drop Down Bottom Sheet**
+  - ✅ **Drop Down Button**
+  - ✅ **Drop Down Menu**
 - ✅ **OTP Form**
-- ✅ **Text Button**
 - ✅ **Text Field**
 
 ## Why Use This Project? 🤔

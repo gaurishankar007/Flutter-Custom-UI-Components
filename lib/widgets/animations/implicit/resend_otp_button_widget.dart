@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../user_inputs/text_button_widget.dart';
+import '../../user_inputs/button/text_button_widget.dart';
 import '../../visual_layouts/text/text_widget.dart';
 import '../explicit/loading_circle_widget.dart';
 
