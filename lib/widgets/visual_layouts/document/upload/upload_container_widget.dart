@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/ui_helpers.dart';
 import '../../../painters/dotted_container_widget.dart';
-import '../../../../utils/app_color.dart';
-import '../../../../utils/ui_helper.dart';
 import '../../text/text_widget.dart';
 
 class UploadContainerWidget extends StatelessWidget {
@@ -12,30 +12,27 @@ class UploadContainerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DottedContainerWidget(
-      strokeColor: AppColor.primary,
+      strokeColor: AppColors.primary,
       dashWidth: 6,
       gapWidth: 4,
-      borderRadius: UIHelper.xSmallCRadius,
+      borderRadius: UIHelpers.xSmallCRadius,
       child: Container(
         width: double.maxFinite,
-        padding: UIHelper.largeAllPadding,
+        padding: UIHelpers.largeAllPadding,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           spacing: 12,
           children: [
             const Icon(
               Icons.cloud_upload_outlined,
-              color: AppColor.primary,
+              color: AppColors.primary,
               size: 32,
             ),
-            const TextWidget(
-              "Click here to add files",
-              color: AppColor.black,
-            ),
+            const TextWidget("Click here to add files", color: AppColors.black),
             TextWidget(
               "Max $maxFileCount "
               "${maxFileCount > 1 ? "files are" : "file is"} allowed",
-              color: AppColor.fade,
+              color: AppColors.fade,
               textType: TextType.bodySmall,
             ),
           ],

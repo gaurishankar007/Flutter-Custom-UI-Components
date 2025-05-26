@@ -62,6 +62,8 @@ Enhance your UI with foundational layout elements:
   - ✅ **Document Upload**: Select and upload images, pdf, and other files
   - ✅ **Document List**: List out images, pdf, and other files in the same list view
   - ✅ **Document BottomSheet**: View tapped document in modal bottom sheet
+- **Draggable**
+  - ✅ **Draggable Content Widget**
 - **Image**
   - ✅ **Asset Image**
   - ✅ **Cached Network Image**
@@ -98,8 +100,10 @@ Intuitive and interactive components for user input:
   - ✅ **Drop Down Bottom Sheet**
   - ✅ **Drop Down Button**
   - ✅ **Drop Down Menu**
-- ✅ **OTP Form**
-- ✅ **Text Field**
+  - ✅ **Drop Down Search Field**
+- **Form**
+  - ✅ **OTP Field**
+  - ✅ **Text Field**
 
 ## Why Use This Project? 🤔
 

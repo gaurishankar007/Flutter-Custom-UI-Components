@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../visual_layouts/text/text_widget.dart';
 
-/// The [width] of the dropdown menu will also decide
-/// the width of the popup container.
+/// A dropdown menu widget that provides a flexible and customizable way to select an item from a list.
+///
+/// This widget supports features like filtering, searching, and custom styling. It allows users to
+/// select an item from a dropdown menu with optional filtering and search capabilities. The width of
+/// the dropdown menu determines the width of the popup container, and it supports callbacks for
+/// selection, filtering, and searching.
 class DropdownMenuWidget<T> extends StatelessWidget {
   final double? width;
   final String? label;
@@ -64,14 +68,15 @@ class DropdownMenuWidget<T> extends StatelessWidget {
         ),
         filterCallback: filterCallback,
         searchCallback: searchCallback,
-        dropdownMenuEntries: entries
-            .map<DropdownMenuEntry<T>>(
-              (dropDownItem) => DropdownMenuEntry<T>(
-                value: dropDownItem.value,
-                label: dropDownItem.label,
-              ),
-            )
-            .toList(),
+        dropdownMenuEntries:
+            entries
+                .map<DropdownMenuEntry<T>>(
+                  (dropDownItem) => DropdownMenuEntry<T>(
+                    value: dropDownItem.value,
+                    label: dropDownItem.label,
+                  ),
+                )
+                .toList(),
       ),
     );
   }

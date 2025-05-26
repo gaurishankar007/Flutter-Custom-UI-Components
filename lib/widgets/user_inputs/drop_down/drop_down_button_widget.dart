@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../visual_layouts/text/text_widget.dart';
 
+/// A dropdown button widget that allows users to select an item from a list of options.
+///
+/// This widget displays a dropdown menu with selectable items. It supports customization
+/// of the selected value, the list of items, and a callback function to handle changes.
+/// The widget is styled with a border and rounded corners for a polished appearance.
 class DropDownButtonWidget<T> extends StatelessWidget {
   final T? selectedValue;
   final List<DropdownItem<T>> items;
@@ -29,28 +34,24 @@ class DropDownButtonWidget<T> extends StatelessWidget {
         child: DropdownButton<T>(
           value: selectedValue,
           isExpanded: true,
-          icon: const Icon(
-            Icons.keyboard_arrow_down,
-            color: Colors.black,
-          ),
+          icon: const Icon(Icons.keyboard_arrow_down, color: Colors.black),
           iconEnabledColor: Colors.black.withAlpha(153),
           iconSize: 25,
           underline: const SizedBox(),
           onChanged: onChanged,
           dropdownColor: Colors.white,
           borderRadius: BorderRadius.circular(12),
-          items: items.map<DropdownMenuItem<T>>(
-            (dropDownItem) {
-              return DropdownMenuItem<T>(
-                value: dropDownItem.value,
-                child: TextWidget(
-                  dropDownItem.label,
-                  overflow: TextOverflow.ellipsis,
-                  fontWeight: FontWeight.w500,
-                ),
-              );
-            },
-          ).toList(),
+          items:
+              items.map<DropdownMenuItem<T>>((dropDownItem) {
+                return DropdownMenuItem<T>(
+                  value: dropDownItem.value,
+                  child: TextWidget(
+                    dropDownItem.label,
+                    overflow: TextOverflow.ellipsis,
+                    fontWeight: FontWeight.w500,
+                  ),
+                );
+              }).toList(),
         ),
       ),
     );
@@ -64,10 +65,7 @@ class DropdownItem<T> {
   final T? value;
   final String label;
 
-  const DropdownItem({
-    required this.value,
-    required this.label,
-  });
+  const DropdownItem({required this.value, required this.label});
 
   @override
   String toString() => 'DropDownItem(value: $value, label: $label)';

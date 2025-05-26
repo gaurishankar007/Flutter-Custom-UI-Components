@@ -1,14 +1,14 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../utils/app_color.dart';
-import '../../../utils/screen_util/screen_util.dart';
-import '../../../utils/ui_helper.dart';
+import '../../../utils/app_colors.dart';
+import '../../../utils/ui_helpers.dart';
 import '../../visual_layouts/loading_circle_widget.dart';
 import '../../visual_layouts/text/text_widget.dart';
 
 class PrimaryButtonWidget extends HookWidget {
-  final Function() onTap;
+  final Function()? onTap;
   final String? text;
   final FontWeight? textFontWeight;
   final Widget? icon;
@@ -21,7 +21,7 @@ class PrimaryButtonWidget extends HookWidget {
 
   const PrimaryButtonWidget({
     super.key,
-    required this.onTap,
+    this.onTap,
     this.text,
     this.textFontWeight,
     this.icon,
@@ -40,10 +40,10 @@ class PrimaryButtonWidget extends HookWidget {
       /// If the button is loading, discard the task
       if (loadingNotifier.value) return;
       // If the button is not loadable
-      if (!isLoadable) return onTap();
+      if (!isLoadable) return onTap?.call();
 
       loadingNotifier.value = true;
-      await onTap();
+      await onTap?.call();
       // If the widget is disposed, don't update value
       if (context.mounted) loadingNotifier.value = false;
     });
@@ -54,29 +54,24 @@ class PrimaryButtonWidget extends HookWidget {
       child: FilledButton(
         onPressed: disabled ? null : onPressed.call,
         style: ButtonStyle(
-          padding: WidgetStatePropertyAll(
-            ScreenUtil.I.adaptiveBound(
-              baseValue: UIHelper.sMediumAllPadding,
-              lowerBound: UIHelper.smallAllPadding,
-            ),
-          ),
+          padding: WidgetStatePropertyAll(_getPadding()),
           backgroundColor: WidgetStateProperty.resolveWith((states) {
             if (states.contains(WidgetState.disabled)) {
-              return AppColor.primary;
+              return AppColors.primary;
             } else if (states.contains(WidgetState.hovered)) {
-              return AppColor.primary;
+              return AppColors.primary;
             } else if (states.contains(WidgetState.pressed)) {
-              return AppColor.primary;
+              return AppColors.primary;
             }
-            return AppColor.primary;
+            return AppColors.primary;
           }),
           minimumSize: WidgetStatePropertyAll(Size.zero),
           foregroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) return AppColor.white;
-            return AppColor.white;
+            if (states.contains(WidgetState.disabled)) return AppColors.white;
+            return AppColors.white;
           }),
           shape: WidgetStatePropertyAll(
-            RoundedRectangleBorder(borderRadius: UIHelper.xSmallCRadius),
+            RoundedRectangleBorder(borderRadius: UIHelpers.xSmallCRadius),
           ),
         ),
         child: ValueListenableBuilder(
@@ -89,16 +84,29 @@ class PrimaryButtonWidget extends HookWidget {
     );
   }
 
+  EdgeInsets _getPadding() {
+    double verticalPadding = kIsWeb ? 20 : 16;
+    double leftPadding = isPrefixIcon && icon != null ? 16 : 24;
+    double rightPadding = !isPrefixIcon && icon != null ? 16 : 24;
+
+    return EdgeInsets.only(
+      top: verticalPadding,
+      bottom: verticalPadding,
+      left: leftPadding,
+      right: rightPadding,
+    );
+  }
+
   Widget _buildChild(bool loading) {
-    if (loading) return LoadingCircleWidget.small(AppColor.white);
+    if (loading) return LoadingCircleWidget.small(AppColors.white);
     if (text != null && icon == null) return TextWidget(text!);
     if (text != null && icon != null) {
       return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (isPrefixIcon) ...[icon!, UIHelper.xSmallHSpace],
+          if (isPrefixIcon) ...[icon!, UIHelpers.xSmallHSpace],
           TextWidget(text!),
-          if (!isPrefixIcon) ...[UIHelper.xSmallHSpace, icon!],
+          if (!isPrefixIcon) ...[UIHelpers.xSmallHSpace, icon!],
         ],
       );
     }

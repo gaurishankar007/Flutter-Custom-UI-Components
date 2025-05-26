@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/ui_helpers.dart';
 import '../../../user_inputs/bottom_sheet/generic_bottom_sheet.dart';
-import '../../../../utils/app_color.dart';
-import '../../../../utils/ui_helper.dart';
 import '../../text/text_widget.dart';
 import '../models/document_type.dart';
 import 'document_upload_bottom_sheet_widget.dart';
@@ -33,24 +33,25 @@ class DocumentUploadWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         InkWell(
-          onTap: () => showGenericBottomSheet(
-            context,
-            child: DocumentUploadBottomSheetWidget(
-              multiSelector: multiSelector,
-              onSelection: onSelection,
-              documentType: documentType,
-            ),
-          ),
-          borderRadius: UIHelper.xSmallCRadius,
+          onTap:
+              () => showGenericBottomSheet(
+                context,
+                child: DocumentUploadBottomSheetWidget(
+                  multiSelector: multiSelector,
+                  onSelection: onSelection,
+                  documentType: documentType,
+                ),
+              ),
+          borderRadius: UIHelpers.xSmallCRadius,
           splashFactory: InkSplash.splashFactory,
-          splashColor: AppColor.highlight,
+          splashColor: AppColors.highlight,
           child: UploadContainerWidget(maxFileCount: maxFileCount),
         ),
-        UIHelper.xSmallVSpace,
+        UIHelpers.xSmallVSpace,
         TextWidget(
           "Only support "
           "${documentType.allowedFileTypes.join(", ")} files.",
-          color: AppColor.fade,
+          color: AppColors.fade,
           textType: TextType.bodySmall,
           textAlign: TextAlign.center,
         ),

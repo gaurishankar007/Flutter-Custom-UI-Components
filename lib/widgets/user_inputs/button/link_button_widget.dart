@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../utils/app_color.dart';
-import '../../../utils/ui_helper.dart';
+import '../../../utils/app_colors.dart';
+import '../../../utils/ui_helpers.dart';
 import '../../visual_layouts/text/text_widget.dart';
 
 class LinkButtonWidget extends HookWidget {
@@ -37,7 +37,7 @@ class LinkButtonWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorNotifier = useValueNotifier(AppColor.primary);
+    final colorNotifier = useValueNotifier(AppColors.primary);
 
     return TextButton(
       onPressed: disabled ? null : onTap.call,
@@ -49,13 +49,13 @@ class LinkButtonWidget extends HookWidget {
         foregroundColor: WidgetStateProperty.resolveWith((states) {
           if (fixedColor) return colorNotifier.value;
           if (states.contains(WidgetState.disabled)) {
-            colorNotifier.value = AppColor.black25;
+            colorNotifier.value = AppColors.black25;
           } else if (states.contains(WidgetState.pressed)) {
-            colorNotifier.value = AppColor.primary;
+            colorNotifier.value = AppColors.primary;
           } else if (states.contains(WidgetState.hovered)) {
-            colorNotifier.value = AppColor.primary;
+            colorNotifier.value = AppColors.primary;
           } else {
-            colorNotifier.value = AppColor.black70;
+            colorNotifier.value = AppColors.black70;
           }
 
           return colorNotifier.value;
@@ -78,9 +78,9 @@ class LinkButtonWidget extends HookWidget {
       return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (isPrefixIcon) ...[icon!, UIHelper.xSmallHSpace],
+          if (isPrefixIcon) ...[icon!, UIHelpers.xSmallHSpace],
           TextWidget(text!, decorationColor: decorationColor),
-          if (!isPrefixIcon) ...[UIHelper.xSmallHSpace, icon!],
+          if (!isPrefixIcon) ...[UIHelpers.xSmallHSpace, icon!],
         ],
       );
     }

@@ -4,8 +4,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../utils/ui_helpers.dart';
 import '../../../user_inputs/bottom_sheet/bottom_sheet_title_widget.dart';
-import '../../../../utils/ui_helper.dart';
 import '../models/document_type.dart';
 import 'upload_icon_container_widget.dart';
 
@@ -30,7 +30,7 @@ class DocumentUploadBottomSheetWidget extends StatelessWidget {
           title: "Select Option",
           titleAlignment: Alignment.center,
         ),
-        UIHelper.sMediumVSpace,
+        UIHelpers.sMediumVSpace,
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -49,10 +49,10 @@ class DocumentUploadBottomSheetWidget extends StatelessWidget {
               iconData: Icons.add_a_photo_outlined,
               text: "Take Photo",
               onTap: () async => await pickUpImages(ImageSource.camera),
-            )
+            ),
           ],
         ),
-        UIHelper.sMediumVSpace,
+        UIHelpers.sMediumVSpace,
       ],
     );
   }

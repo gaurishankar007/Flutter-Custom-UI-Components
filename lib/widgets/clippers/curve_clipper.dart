@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../../utils/app_color.dart';
+import '../../utils/app_colors.dart';
 
 class CurveContainerWidget extends StatelessWidget {
   final double? height;
@@ -22,8 +22,8 @@ class CurveContainerWidget extends StatelessWidget {
     super.key,
     this.height,
     this.width,
-    this.curvedColor = AppColor.white,
-    this.unCurvedColor = AppColor.primary,
+    this.curvedColor = AppColors.white,
+    this.unCurvedColor = AppColors.primary,
     required this.curveSide,
     required this.curvePercentage,
   });
@@ -32,8 +32,8 @@ class CurveContainerWidget extends StatelessWidget {
     super.key,
     this.height = 100,
     this.width = double.maxFinite,
-    this.curvedColor = AppColor.white,
-    this.unCurvedColor = AppColor.primary,
+    this.curvedColor = AppColors.white,
+    this.unCurvedColor = AppColors.primary,
     this.curveSide = CurveSide.top,
     this.curvePercentage = 70,
   });
@@ -45,9 +45,7 @@ class CurveContainerWidget extends StatelessWidget {
         SizedBox(
           height: height,
           width: width,
-          child: DecoratedBox(
-            decoration: BoxDecoration(color: unCurvedColor),
-          ),
+          child: DecoratedBox(decoration: BoxDecoration(color: unCurvedColor)),
         ),
         ClipPath(
           clipper: CurveClipper(
@@ -57,9 +55,7 @@ class CurveContainerWidget extends StatelessWidget {
           child: SizedBox(
             height: height,
             width: width,
-            child: DecoratedBox(
-              decoration: BoxDecoration(color: curvedColor),
-            ),
+            child: DecoratedBox(decoration: BoxDecoration(color: curvedColor)),
           ),
         ),
       ],
@@ -72,10 +68,7 @@ class CurveClipper extends CustomClipper<Path> {
   final CurveSide curveSide;
   final double curvePercentage;
 
-  const CurveClipper({
-    required this.curveSide,
-    required this.curvePercentage,
-  });
+  const CurveClipper({required this.curveSide, required this.curvePercentage});
 
   @override
   Path getClip(Size size) {
@@ -124,11 +117,7 @@ class CurveClipper extends CustomClipper<Path> {
         break;
     }
 
-    path.arcToPoint(
-      endOffset,
-      radius: radius,
-      clockwise: clockwise,
-    );
+    path.arcToPoint(endOffset, radius: radius, clockwise: clockwise);
 
     path.close();
 
@@ -140,9 +129,4 @@ class CurveClipper extends CustomClipper<Path> {
 }
 
 /// It determines which half of the widget will be visible
-enum CurveSide {
-  left,
-  top,
-  right,
-  bottom,
-}
+enum CurveSide { left, top, right, bottom }

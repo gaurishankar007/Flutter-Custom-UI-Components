@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/ui_helper.dart';
+import '../../../utils/ui_helpers.dart';
 
 class IconButtonWidget extends StatelessWidget {
   final Function() onPressed;
@@ -25,7 +25,7 @@ class IconButtonWidget extends StatelessWidget {
     Widget child = IconButton(
       onPressed: disabled ? null : onPressed,
       style: IconButton.styleFrom(
-        padding: padding ?? UIHelper.xSmallAllPadding,
+        padding: padding ?? UIHelpers.xSmallAllPadding,
         minimumSize: minimumSize ?? Size.zero,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         overlayColor: disableSplash ? Colors.transparent : null,

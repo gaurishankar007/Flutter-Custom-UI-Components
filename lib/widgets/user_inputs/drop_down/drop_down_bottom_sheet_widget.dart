@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 import '../../visual_layouts/text/text_widget.dart';
 import '../bottom_sheet/bottom_sheet_title_widget.dart';
 import '../bottom_sheet/generic_bottom_sheet.dart';
-import '../text_field_widget.dart';
+import '../form/text_field_widget.dart';
 
+/// A customizable dropdown widget that displays a list of selectable items in a bottom sheet.
+///
+/// This widget allows users to select an item from a list, which is displayed in a modal bottom sheet.
+/// It includes a title, optional label and hint text, and supports a callback function to handle
+/// the selected value. The selected item is visually highlighted, and the widget updates its state
+/// accordingly when an item is selected.
 class DropdownBottomSheetWidget<T> extends StatefulWidget {
   final String title;
   final String? labelText;
@@ -37,9 +43,7 @@ class _DropdownBottomSheetWidgetState<T>
   void initState() {
     super.initState();
     _selectedValue = widget.selectedItem;
-    controller = TextEditingController(
-      text: _selectedValue?.label,
-    );
+    controller = TextEditingController(text: _selectedValue?.label);
   }
 
   @override
@@ -51,10 +55,8 @@ class _DropdownBottomSheetWidgetState<T>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => showGenericBottomSheet(
-        context,
-        child: _buildDropdownItems(),
-      ),
+      onTap:
+          () => showGenericBottomSheet(context, child: _buildDropdownItems()),
       child: ListenableBuilder(
         listenable: controller,
         builder: (context, child) {
@@ -103,9 +105,10 @@ class _DropdownBottomSheetWidgetState<T>
                         vertical: 16,
                       ),
                       decoration: BoxDecoration(
-                        color: _selectedValue?.value == dropDownData.value
-                            ? Colors.lightBlueAccent
-                            : Colors.white,
+                        color:
+                            _selectedValue?.value == dropDownData.value
+                                ? Colors.lightBlueAccent
+                                : Colors.white,
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Row(
@@ -114,13 +117,13 @@ class _DropdownBottomSheetWidgetState<T>
                           TextWidget(dropDownData.label),
                           _selectedValue?.value == dropDownData.value
                               ? const Icon(
-                                  Icons.radio_button_checked,
-                                  color: Colors.blue,
-                                )
+                                Icons.radio_button_checked,
+                                color: Colors.blue,
+                              )
                               : const Icon(
-                                  Icons.radio_button_off,
-                                  color: Colors.grey,
-                                )
+                                Icons.radio_button_off,
+                                color: Colors.grey,
+                              ),
                         ],
                       ),
                     ),
@@ -139,10 +142,7 @@ class DropdownItem<T> {
   final T value;
   final String label;
 
-  const DropdownItem({
-    required this.value,
-    required this.label,
-  });
+  const DropdownItem({required this.value, required this.label});
 
   @override
   bool operator ==(covariant DropdownItem<T> other) {

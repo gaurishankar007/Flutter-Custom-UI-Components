@@ -17,8 +17,8 @@ enum Space {
   final double value;
 }
 
-class UIHelper {
-  UIHelper._();
+class UIHelpers {
+  UIHelpers._();
 
   /// Shows nothing in the UI
   static const nothing = SizedBox.shrink();
@@ -94,41 +94,50 @@ class UIHelper {
 
   //<========== Horizontal Padding ==========>
   /// Horizontal Padding = 12
-  static final smallHPadding =
-      EdgeInsets.symmetric(horizontal: Space.small.value);
+  static final smallHPadding = EdgeInsets.symmetric(
+    horizontal: Space.small.value,
+  );
 
   /// Horizontal Padding = 16
-  static final sMediumHPadding =
-      EdgeInsets.symmetric(horizontal: Space.sMedium.value);
+  static final sMediumHPadding = EdgeInsets.symmetric(
+    horizontal: Space.sMedium.value,
+  );
 
   //<========== Vertical Padding ==========>
   /// Vertical Padding = 4
-  static final xxSmallVPadding =
-      EdgeInsets.symmetric(vertical: Space.xxSmall.value);
+  static final xxSmallVPadding = EdgeInsets.symmetric(
+    vertical: Space.xxSmall.value,
+  );
 
   /// Vertical Padding = 8
-  static final xSmallVPadding =
-      EdgeInsets.symmetric(vertical: Space.xSmall.value);
+  static final xSmallVPadding = EdgeInsets.symmetric(
+    vertical: Space.xSmall.value,
+  );
 
   /// Vertical Padding = 12
-  static final smallVPadding =
-      EdgeInsets.symmetric(vertical: Space.small.value);
+  static final smallVPadding = EdgeInsets.symmetric(
+    vertical: Space.small.value,
+  );
 
   /// Vertical Padding = 16
-  static final sMediumVPadding =
-      EdgeInsets.symmetric(vertical: Space.sMedium.value);
+  static final sMediumVPadding = EdgeInsets.symmetric(
+    vertical: Space.sMedium.value,
+  );
 
   /// Vertical Padding = 20
-  static final mediumVPadding =
-      EdgeInsets.symmetric(vertical: Space.medium.value);
+  static final mediumVPadding = EdgeInsets.symmetric(
+    vertical: Space.medium.value,
+  );
 
   /// Vertical Padding = 24
-  static final largeVPadding =
-      EdgeInsets.symmetric(vertical: Space.large.value);
+  static final largeVPadding = EdgeInsets.symmetric(
+    vertical: Space.large.value,
+  );
 
   /// Vertical Padding = 28
-  static final xLargeVPadding =
-      EdgeInsets.symmetric(vertical: Space.xLarge.value);
+  static final xLargeVPadding = EdgeInsets.symmetric(
+    vertical: Space.xLarge.value,
+  );
 
   //<========== Symmetric Padding ==========>
   /// Symmetric Padding = 8 horizontal, 4 vertical

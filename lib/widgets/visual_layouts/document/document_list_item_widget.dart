@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/app_color.dart';
-import '../../../utils/ui_helper.dart';
+import '../../../utils/app_colors.dart';
+import '../../../utils/ui_helpers.dart';
 import '../text/text_widget.dart';
 
 class DocumentListItemWidget extends StatelessWidget {
@@ -25,24 +25,20 @@ class DocumentListItemWidget extends StatelessWidget {
       dense: true,
       minVerticalPadding: 1,
       horizontalTitleGap: 8,
-      contentPadding: UIHelper.sMediumHSmallVPadding,
+      contentPadding: UIHelpers.sMediumHSmallVPadding,
       visualDensity: const VisualDensity(vertical: -2),
-      tileColor: AppColor.highlight,
+      tileColor: AppColors.highlight,
       shape: RoundedRectangleBorder(
-        borderRadius: UIHelper.smallCRadius,
-        side: const BorderSide(color: AppColor.containerBorder),
+        borderRadius: UIHelpers.smallCRadius,
+        side: const BorderSide(color: AppColors.containerBorder),
       ),
       leading: Container(
-        padding: UIHelper.xSmallAllPadding,
+        padding: UIHelpers.xSmallAllPadding,
         decoration: const BoxDecoration(
-          color: AppColor.primary,
+          color: AppColors.primary,
           shape: BoxShape.circle,
         ),
-        child: Icon(
-          documentIconData,
-          color: AppColor.white,
-          size: 18,
-        ),
+        child: Icon(documentIconData, color: AppColors.white, size: 18),
       ),
       title: TextWidget(title),
       trailing: trailing,

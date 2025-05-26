@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
-import '../../../utils/ui_helper.dart';
+import '../../../utils/ui_helpers.dart';
 import '../cupertino_loading_widget.dart';
 import '../error_indicator_widget.dart';
 
@@ -31,7 +31,7 @@ class ImageMemoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (uint8List.isEmpty) return UIHelper.nothing;
+    if (uint8List.isEmpty) return UIHelpers.nothing;
 
     Widget child = Image.memory(
       uint8List,
@@ -50,10 +50,7 @@ class ImageMemoryWidget extends StatelessWidget {
     if (isCircular) {
       return ClipOval(child: child);
     } else if (borderRadius != null) {
-      return ClipRRect(
-        borderRadius: borderRadius!,
-        child: child,
-      );
+      return ClipRRect(borderRadius: borderRadius!, child: child);
     }
 
     return child;

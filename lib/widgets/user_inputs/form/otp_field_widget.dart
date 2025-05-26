@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
-import '../../utils/app_color.dart';
-import '../../utils/ui_helper.dart';
+import '../../../utils/app_colors.dart';
+import '../../../utils/ui_helpers.dart';
 
-class OTPFormWidget extends StatelessWidget {
+class OTPFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   final Function(String)? onChanged;
   final bool hasError;
 
-  const OTPFormWidget({
+  const OTPFieldWidget({
     super.key,
     required this.controller,
     required this.onChanged,
@@ -19,18 +19,18 @@ class OTPFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: UIHelper.xLargeVPadding,
+      padding: UIHelpers.xLargeVPadding,
       child: Pinput(
         controller: controller,
         onChanged: onChanged,
-        separatorBuilder: (index) => UIHelper.sMediumHSpace,
+        separatorBuilder: (index) => UIHelpers.sMediumHSpace,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         defaultPinTheme: PinTheme(
           height: 60,
           decoration: BoxDecoration(
-            borderRadius: UIHelper.smallCRadius,
+            borderRadius: UIHelpers.smallCRadius,
             border: Border.all(
-              color: hasError ? AppColor.error : AppColor.border,
+              color: hasError ? AppColors.error : AppColors.border,
             ),
           ),
           textStyle: const TextStyle(fontSize: 14),

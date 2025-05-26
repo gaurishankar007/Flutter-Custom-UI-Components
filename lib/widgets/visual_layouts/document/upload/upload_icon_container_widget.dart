@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../utils/app_color.dart';
-import '../../../../utils/ui_helper.dart';
+import '../../../../utils/app_colors.dart';
+import '../../../../utils/ui_helpers.dart';
 import '../../text/text_widget.dart';
 
 class UploadIconContainerWidget extends StatelessWidget {
@@ -23,12 +23,12 @@ class UploadIconContainerWidget extends StatelessWidget {
         Navigator.pop(context);
         onTap.call();
       },
-      borderRadius: UIHelper.smallCRadius,
+      borderRadius: UIHelpers.smallCRadius,
       child: Ink(
-        padding: UIHelper.xLargeAllPadding,
+        padding: UIHelpers.xLargeAllPadding,
         decoration: BoxDecoration(
-          color: AppColor.highlight,
-          borderRadius: UIHelper.smallCRadius,
+          color: AppColors.highlight,
+          borderRadius: UIHelpers.smallCRadius,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -37,11 +37,13 @@ class UploadIconContainerWidget extends StatelessWidget {
               height: 54,
               width: 54,
               decoration: const BoxDecoration(
-                  color: AppColor.primary, shape: BoxShape.circle),
-              child: Icon(iconData, color: AppColor.white),
+                color: AppColors.primary,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(iconData, color: AppColors.white),
             ),
-            UIHelper.xSmallVSpace,
-            TextWidget.bodyLarge(text)
+            UIHelpers.xSmallVSpace,
+            TextWidget.bodyLarge(text),
           ],
         ),
       ),
