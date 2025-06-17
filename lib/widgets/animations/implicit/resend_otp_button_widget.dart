@@ -41,7 +41,6 @@ class ResendOTPButtonWidget extends HookWidget {
               : "Resend OTP",
           foregroundColor: Colors.white,
           textType: TextType.bodyMedium,
-          shape: const StadiumBorder(),
           expanded: true,
           disabled: showTimer.value,
         );

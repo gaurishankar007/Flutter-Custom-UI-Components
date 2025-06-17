@@ -1,68 +1,136 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class TextFieldWidget extends StatelessWidget {
+import '../../../../../core/constants/app_colors.dart';
+import '../../../utils/ui_helpers.dart';
+import '../../visual_layouts/text/text_widget.dart';
+
+class TextFieldWidget extends HookWidget {
+  final String? title;
+  final Color? titleColor;
   final TextEditingController? controller;
   final TextInputType keyboardType;
-  final bool obscureText;
-  final Function(String?)? onChanged;
-  final String? initialValue;
-  final String? Function(String?)? validator;
+  final bool readOnly;
   final bool enabled;
-  final String? labelText;
+  final String? initialValue;
+  final Function(String?)? onChanged;
+  final Function()? onTap;
+  final TapRegionCallback? onTapOutside;
+  final bool obscureText;
+  final String? Function(String?)? validator;
+  final AutovalidateMode? autovalidateMode;
+  final FocusNode? focusNode;
   final String? hintText;
   final Widget? prefixIcon;
-  final BoxConstraints? prefixIconConstraints;
   final Widget? suffixIcon;
-  final BoxConstraints? suffixIconConstraints;
 
   const TextFieldWidget({
     super.key,
+    this.title,
+    this.titleColor,
     this.controller,
-    this.obscureText = false,
     this.keyboardType = TextInputType.text,
-    this.onChanged,
-    this.initialValue,
-    this.validator,
+    this.readOnly = false,
     this.enabled = true,
-    this.labelText,
+    this.initialValue,
+    this.onChanged,
+    this.onTap,
+    this.onTapOutside,
+    this.validator,
+    this.autovalidateMode,
+    this.obscureText = false,
+    this.focusNode,
     this.hintText,
     this.prefixIcon,
-    this.prefixIconConstraints,
     this.suffixIcon,
-    this.suffixIconConstraints,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    final errorNotifier = useValueNotifier(false);
+
+    Widget child = TextFormField(
       controller: controller,
       keyboardType: keyboardType,
-      onChanged: onChanged,
       initialValue: initialValue,
+      onChanged: onChanged,
+      onTap: onTap,
+      onTapOutside: onTapOutside,
+      validator: (value) {
+        final validation = validator?.call(value);
+        errorNotifier.value = validation?.isNotEmpty == true;
+        return validation;
+      },
+      readOnly: readOnly,
+      enabled: enabled,
+      autovalidateMode: autovalidateMode,
       obscureText: obscureText,
       obscuringCharacter: "*",
-      validator: validator,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      style: const TextStyle(fontSize: 14, color: Colors.black),
+      style: TextStyle(
+        color:
+            enabled
+                ? AppColors.black.withAlpha(222)
+                : AppColors.black.withAlpha(97),
+        fontSize: 17,
+      ),
+      focusNode: focusNode,
       decoration: InputDecoration(
-        enabled: enabled,
-        label: labelText != null ? Text(labelText!) : null,
         hintText: hintText,
-        prefixIconConstraints: prefixIconConstraints,
-        prefixIcon: prefixIcon,
-        suffixIconConstraints: suffixIconConstraints,
-        suffixIcon: suffixIcon,
-        enabledBorder: _textFiledBorder(Colors.grey),
-        focusedBorder: _textFiledBorder(Colors.grey),
-        disabledBorder: _textFiledBorder(Colors.grey),
-        errorBorder: _textFiledBorder(Colors.red),
-        focusedErrorBorder: _textFiledBorder(Colors.red),
+        hintStyle: TextStyle(
+          color: AppColors.black.withAlpha(97),
+          fontSize: 17,
+        ),
+        errorStyle: TextStyle(
+          color: AppColors.error,
+          fontSize: 17,
+          height: 1.5,
+        ),
+        fillColor: enabled ? null : AppColors.primary.withAlpha(127),
+        contentPadding: EdgeInsets.only(
+          left: prefixIcon == null ? 16 : 8,
+          right: suffixIcon == null ? 16 : 8,
+          top: 16,
+          bottom: 16,
+        ),
+        prefixIcon: _wrapIcon(prefixIcon, true),
+        suffixIcon: _wrapIcon(suffixIcon, false),
+        prefixIconConstraints: BoxConstraints(),
+        suffixIconConstraints: BoxConstraints(),
       ),
     );
+
+    if (title?.isNotEmpty == true) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ValueListenableBuilder(
+            valueListenable: errorNotifier,
+            builder: (context, isError, child) {
+              final color = isError ? AppColors.error : titleColor;
+              return TextWidget(
+                title!,
+                color: enabled ? color : AppColors.black.withAlpha(97),
+              );
+            },
+          ),
+          UIHelpers.xxSmallVSpace,
+          child,
+        ],
+      );
+    }
+
+    return child;
   }
 
-  OutlineInputBorder _textFiledBorder(Color borderColor) => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
-        borderSide: BorderSide(color: borderColor),
-      );
+  Widget? _wrapIcon(Widget? icon, bool isPrefix) {
+    if (icon == null) return null;
+    return Padding(
+      padding: EdgeInsets.only(
+        left: isPrefix ? 16 : 0,
+        right: isPrefix ? 0 : 16,
+      ),
+      child: icon,
+    );
+  }
 }

@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../utils/app_colors.dart';
-import '../../../utils/ui_helpers.dart';
+import '../../../core/constants/app_colors.dart';
 import '../../visual_layouts/text/text_widget.dart';
 
 class LinkButtonWidget extends HookWidget {
   final Function() onTap;
-  final String? text;
-  final FontWeight? textFontWeight;
+  final String? label;
+  final double textSize;
   final Widget? icon;
   final bool isPrefixIcon;
   final double? height;
   final double? width;
   final EdgeInsets? padding;
+  final bool isLoadable;
+  final bool disabled;
 
   /// Whether the button color should be changed or not based on the widget state.
   final bool fixedColor;
-  final bool isLoadable;
-  final bool disabled;
 
   const LinkButtonWidget({
     super.key,
     required this.onTap,
-    this.text,
-    this.textFontWeight,
+    this.label,
+    this.textSize = 17,
     this.icon,
     this.isPrefixIcon = true,
     this.height,
@@ -71,16 +70,20 @@ class LinkButtonWidget extends HookWidget {
   }
 
   Widget _buildChild(Color decorationColor) {
-    if (text != null && icon == null) {
-      return TextWidget(text!, decorationColor: decorationColor);
-    }
-    if (text != null && icon != null) {
+    if (label != null) {
+      final textWidget = TextWidget(
+        label!,
+        decorationColor: decorationColor,
+      );
+      
+      if (icon == null) return textWidget;
       return Row(
         mainAxisSize: MainAxisSize.min,
+        spacing: 2,
         children: [
-          if (isPrefixIcon) ...[icon!, UIHelpers.xSmallHSpace],
-          TextWidget(text!, decorationColor: decorationColor),
-          if (!isPrefixIcon) ...[UIHelpers.xSmallHSpace, icon!],
+          if (isPrefixIcon) icon!,
+          Flexible(child: textWidget),
+          if (!isPrefixIcon) icon!,
         ],
       );
     }

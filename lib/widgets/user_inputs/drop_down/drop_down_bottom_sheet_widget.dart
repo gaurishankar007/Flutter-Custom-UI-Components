@@ -36,14 +36,14 @@ class DropdownBottomSheetWidget<T> extends StatefulWidget {
 
 class _DropdownBottomSheetWidgetState<T>
     extends State<DropdownBottomSheetWidget<T>> {
-  DropdownItem<T>? _selectedValue;
+  DropdownItem<T>? _selectedItem;
 
   late TextEditingController controller;
   @override
   void initState() {
     super.initState();
-    _selectedValue = widget.selectedItem;
-    controller = TextEditingController(text: _selectedValue?.label);
+    _selectedItem = widget.selectedItem;
+    controller = TextEditingController(text: _selectedItem?.label);
   }
 
   @override
@@ -63,7 +63,6 @@ class _DropdownBottomSheetWidgetState<T>
           return TextFieldWidget(
             enabled: false,
             controller: controller,
-            labelText: widget.labelText,
             hintText: widget.hintText,
             suffixIcon: const Icon(
               Icons.keyboard_arrow_down,
@@ -94,7 +93,7 @@ class _DropdownBottomSheetWidgetState<T>
                   final dropDownData = widget.items[index];
                   return GestureDetector(
                     onTap: () {
-                      setState(() => _selectedValue = dropDownData);
+                      setState(() => _selectedItem = dropDownData);
                       controller.text = dropDownData.label;
                       widget.onChanged(dropDownData.value);
                       Navigator.pop(context);
@@ -106,7 +105,7 @@ class _DropdownBottomSheetWidgetState<T>
                       ),
                       decoration: BoxDecoration(
                         color:
-                            _selectedValue?.value == dropDownData.value
+                            _selectedItem?.value == dropDownData.value
                                 ? Colors.lightBlueAccent
                                 : Colors.white,
                         borderRadius: BorderRadius.circular(4),
@@ -115,7 +114,7 @@ class _DropdownBottomSheetWidgetState<T>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextWidget(dropDownData.label),
-                          _selectedValue?.value == dropDownData.value
+                          _selectedItem?.value == dropDownData.value
                               ? const Icon(
                                 Icons.radio_button_checked,
                                 color: Colors.blue,

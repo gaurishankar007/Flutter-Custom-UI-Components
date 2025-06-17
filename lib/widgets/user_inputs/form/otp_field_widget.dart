@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
-import '../../../utils/app_colors.dart';
+import '../../../core/constants/app_colors.dart';
 import '../../../utils/ui_helpers.dart';
 
 class OTPFieldWidget extends StatelessWidget {

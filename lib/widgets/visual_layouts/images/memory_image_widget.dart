@@ -1,23 +1,25 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
+import '../../../utils/ui_helpers.dart';
 import '../cupertino_loading_widget.dart';
 import '../error_indicator_widget.dart';
 
-class ImageFileWidget extends StatelessWidget {
-  final File file;
+class MemoryImageWidget extends StatelessWidget {
+  /// image bytes data
+  final Uint8List uint8List;
   final double? height;
   final double? width;
   final int? cacheHeight;
   final int? cacheWidth;
-  final BoxFit? fit;
   final bool isCircular;
+  final BoxFit? fit;
   final BorderRadius? borderRadius;
 
-  const ImageFileWidget({
+  const MemoryImageWidget({
     super.key,
-    required this.file,
+    required this.uint8List,
     this.height,
     this.width,
     this.cacheHeight,
@@ -29,8 +31,10 @@ class ImageFileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget child = Image.file(
-      file,
+    if (uint8List.isEmpty) return UIHelpers.nothing;
+
+    Widget child = Image.memory(
+      uint8List,
       height: height,
       width: width,
       cacheHeight: cacheHeight,
@@ -46,10 +50,7 @@ class ImageFileWidget extends StatelessWidget {
     if (isCircular) {
       return ClipOval(child: child);
     } else if (borderRadius != null) {
-      return ClipRRect(
-        borderRadius: borderRadius!,
-        child: child,
-      );
+      return ClipRRect(borderRadius: borderRadius!, child: child);
     }
 
     return child;

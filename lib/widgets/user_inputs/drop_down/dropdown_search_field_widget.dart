@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/app_colors.dart';
 import '../../../utils/ui_helpers.dart';
 import '../form/text_field_widget.dart';
+import '../overlay/overlay_decoration_widget.dart';
 
-/// A dropdown search field widget that combines a text field with a dropdown overlay for item selection.
+/// A text field with a dropdown overlay for selecting items as you type.
 ///
-/// This widget allows users to type in a text field and displays a dropdown overlay with selectable items.
-/// It supports features like custom item widgets, separators, and dynamic updates to the overlay content.
-/// The overlay is automatically shown or hidden based on the provided list of items.
+/// Shows a dropdown below the field when [overlayItems] is not empty. The overlay displays each item
+/// using [overlayItemWidget], and updates automatically when [overlayItems] changes. Supports custom
+/// icons, hint text, separators, padding, and max overlay height. Useful for searchable dropdowns and autocomplete.
 class DropdownSearchFieldWidget<T> extends StatefulWidget {
   final TextEditingController? controller;
   final Function(String?)? onChanged;
@@ -24,7 +24,7 @@ class DropdownSearchFieldWidget<T> extends StatefulWidget {
 
   /// The gap between the overlay and the text field;
   final double overlayGap;
-  final double? overlayHeight;
+  final double overlayMaxHeight;
   final EdgeInsets? overlayPadding;
 
   const DropdownSearchFieldWidget({
@@ -38,16 +38,16 @@ class DropdownSearchFieldWidget<T> extends StatefulWidget {
     required this.overlayItemWidget,
     this.overlayItemSeparatorWidget,
     this.overlayGap = 8,
-    this.overlayHeight,
+    this.overlayMaxHeight = double.infinity,
     this.overlayPadding,
   });
 
   @override
   State<DropdownSearchFieldWidget<T>> createState() =>
-      _SearchDropdownFieldWidgetState<T>();
+      _DropdownSearchFieldWidgetState<T>();
 }
 
-class _SearchDropdownFieldWidgetState<T>
+class _DropdownSearchFieldWidgetState<T>
     extends State<DropdownSearchFieldWidget<T>> {
   final GlobalKey _textFieldKey = GlobalKey();
   final LayerLink _layerLink = LayerLink();
@@ -139,7 +139,7 @@ class _SearchDropdownFieldWidgetState<T>
             link: _layerLink,
             showWhenUnlinked: false,
             offset: Offset(0, size.height + widget.overlayGap),
-            child: Material(child: _buildOverlayContainer()),
+            child: _buildOverlayContainer(),
           ),
         );
       },
@@ -148,31 +148,23 @@ class _SearchDropdownFieldWidgetState<T>
 
   /// Build the overlay container that shows the overlay items
   Widget _buildOverlayContainer() {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: UIHelpers.xSmallCRadius,
-        border: Border.all(color: AppColors.black25),
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(0, 1),
-            blurRadius: 20,
-            color: AppColors.black.withAlpha(25),
+    return OverlayDecorationWidget(
+      padding: widget.overlayPadding,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: widget.overlayMaxHeight),
+        child: Material(
+          color: Colors.transparent,
+          child: ListView.separated(
+            shrinkWrap: true,
+            itemCount: widget.overlayItems.length,
+            separatorBuilder: (context, index) {
+              return widget.overlayItemSeparatorWidget ??
+                  UIHelpers.xSmallVSpace;
+            },
+            itemBuilder: (context, index) {
+              return widget.overlayItemWidget(widget.overlayItems[index]);
+            },
           ),
-        ],
-      ),
-      child: SizedBox(
-        height: widget.overlayHeight,
-        child: ListView.separated(
-          padding: widget.overlayPadding ?? UIHelpers.smallAllPadding,
-          shrinkWrap: true,
-          itemCount: widget.overlayItems.length,
-          separatorBuilder: (context, index) {
-            return widget.overlayItemSeparatorWidget ?? UIHelpers.xSmallVSpace;
-          },
-          itemBuilder: (context, index) {
-            return widget.overlayItemWidget(widget.overlayItems[index]);
-          },
         ),
       ),
     );

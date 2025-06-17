@@ -1,25 +1,23 @@
-import 'dart:typed_data';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import '../../../utils/ui_helpers.dart';
 import '../cupertino_loading_widget.dart';
 import '../error_indicator_widget.dart';
 
-class ImageMemoryWidget extends StatelessWidget {
-  /// image bytes data
-  final Uint8List uint8List;
+class FileImageWidget extends StatelessWidget {
+  final File file;
   final double? height;
   final double? width;
   final int? cacheHeight;
   final int? cacheWidth;
-  final bool isCircular;
   final BoxFit? fit;
+  final bool isCircular;
   final BorderRadius? borderRadius;
 
-  const ImageMemoryWidget({
+  const FileImageWidget({
     super.key,
-    required this.uint8List,
+    required this.file,
     this.height,
     this.width,
     this.cacheHeight,
@@ -31,10 +29,8 @@ class ImageMemoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (uint8List.isEmpty) return UIHelpers.nothing;
-
-    Widget child = Image.memory(
-      uint8List,
+    Widget child = Image.file(
+      file,
       height: height,
       width: width,
       cacheHeight: cacheHeight,

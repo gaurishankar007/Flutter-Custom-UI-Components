@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../cupertino_loading_widget.dart';
 import '../error_indicator_widget.dart';
 
-class ImageAssetWidget extends StatelessWidget {
+class AssetImageWidget extends StatelessWidget {
   final ImageProvider? imageProvider;
   final double? width;
   final double? height;
@@ -11,7 +11,7 @@ class ImageAssetWidget extends StatelessWidget {
   final BorderRadius? borderRadius;
   final bool circular;
 
-  const ImageAssetWidget({
+  const AssetImageWidget({
     super.key,
     this.imageProvider,
     this.width,
@@ -47,12 +47,12 @@ class ImageAssetWidget extends StatelessWidget {
     return child;
   }
 
-  factory ImageAssetWidget.circular({
+  factory AssetImageWidget.circular({
     required double diameter,
     String imageUrl = "",
     ImageProvider? imageProvider,
   }) {
-    return ImageAssetWidget(
+    return AssetImageWidget(
       height: diameter,
       width: diameter,
       fit: BoxFit.cover,

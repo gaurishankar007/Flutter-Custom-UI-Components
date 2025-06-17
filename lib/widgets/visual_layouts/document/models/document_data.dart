@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../error_indicator_widget.dart';
-import '../../image/image_cached_network_widget.dart';
-import '../../image/image_file_widget.dart';
-import '../../image/image_memory_widget.dart';
+import '../../images/cached_network_image_widget.dart';
+import '../../images/file_image_widget.dart';
+import '../../images/memory_image_widget.dart';
 import '../../pdf/pdf_file_widget.dart';
 import '../../pdf/pdf_memory_widget.dart';
 

@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/gestures.dart' show PointerDeviceKind;
 import 'package:flutter/material.dart';
 
-import '../../../utils/app_colors.dart';
+import '../../../core/constants/app_colors.dart';
 import '../../../utils/screen_util/screen_util.dart';
 import '../../../utils/ui_helpers.dart';
 import '../text/text_widget.dart';
@@ -21,10 +22,14 @@ class DraggableContentWidget extends StatefulWidget {
   /// Widgets that are only visible when the sheet is expanded.
   final List<Widget> expandedOnlyChildren;
 
+  /// Callback method for getting the minimum and maximum heights of the content.
+  final Function(double minHeight, double maxHeight)? onContentMeasured;
+
   const DraggableContentWidget({
     super.key,
     required this.alwaysVisibleChildren,
     required this.expandedOnlyChildren,
+    this.onContentMeasured,
   });
 
   @override
@@ -37,15 +42,33 @@ class _DraggableContentWidgetState extends State<DraggableContentWidget> {
   final _copyRightContentKey = GlobalKey();
   final _expandedOnlyContentKey = GlobalKey();
   // Minimum height of the widget
-  double _minChildSize = .25;
+  double _minChildSize = .1;
   // Maximum height of the widget
-  double _maxChildSize = 1;
+  double _maxChildSize = .5;
+  List<double> _snapSizes = [];
 
   @override
   void initState() {
     super.initState();
     // After the first frame, measure the content to set min/max sizes dynamically
     WidgetsBinding.instance.addPostFrameCallback((_) => _measureContent());
+  }
+
+  @override
+  void didUpdateWidget(covariant DraggableContentWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.alwaysVisibleChildren != widget.alwaysVisibleChildren ||
+        oldWidget.expandedOnlyChildren != widget.expandedOnlyChildren) {
+      // Re-measure content if the children change
+      WidgetsBinding.instance.addPostFrameCallback((_) => _measureContent());
+    }
+  }
+
+  @override
+  void dispose() {
+    _draggableScrollableController.dispose();
+    super.dispose();
   }
 
   /// Measures the heights of the always-visible, expanded-only, and copyright content,
@@ -62,25 +85,25 @@ class _DraggableContentWidgetState extends State<DraggableContentWidget> {
       return;
     }
 
+    final minHeight =
+        alwaysVisibleContentBox.size.height + copyRightContentBox.size.height;
+    final maxHeight = minHeight + expandedOnlyContentBox.size.height;
+
     // Update min/max child size based on the height of the content
     setState(() {
-      final minHeight =
-          alwaysVisibleContentBox.size.height + copyRightContentBox.size.height;
-      final maxHeight = minHeight + expandedOnlyContentBox.size.height;
-      _minChildSize = (minHeight / ScreenUtil.I.height).clamp(0.01, 1);
-      _maxChildSize = (maxHeight / ScreenUtil.I.height).clamp(0.01, 1);
+      _minChildSize = (minHeight / ScreenUtil.I.height).clamp(0.001, 1);
+      _maxChildSize = (maxHeight / ScreenUtil.I.height).clamp(0.001, 1);
+      if (_minChildSize != _maxChildSize) {
+        _snapSizes = [_minChildSize, _maxChildSize];
+      }
     });
+
+    widget.onContentMeasured?.call(minHeight, maxHeight);
   }
 
   /// Helper to get the RenderBox for a given GlobalKey.
   RenderBox? _getRenderBox(GlobalKey key) =>
       key.currentContext?.findRenderObject() as RenderBox?;
-
-  @override
-  void dispose() {
-    _draggableScrollableController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +112,8 @@ class _DraggableContentWidgetState extends State<DraggableContentWidget> {
       initialChildSize: _maxChildSize,
       minChildSize: _minChildSize,
       maxChildSize: _maxChildSize,
-      snap: true,
-      snapSizes: [_minChildSize, _maxChildSize],
+      snap: _snapSizes.isNotEmpty,
+      snapSizes: _snapSizes,
       builder: (context, scrollController) {
         return DecoratedBox(
           decoration: BoxDecoration(
@@ -107,39 +130,47 @@ class _DraggableContentWidgetState extends State<DraggableContentWidget> {
           child: Column(
             children: [
               Flexible(
-                child: ListView(
-                  controller: scrollController,
-                  padding: UIHelpers.sMediumHPadding,
-                  children: [
-                    Column(
-                      key: _alwaysVisibleContentKey,
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        UIHelpers.xSmallVSpace,
-                        Center(
-                          child: SizedBox(
-                            width: 96,
-                            height: 6,
-                            child: DecoratedBox(
-                              decoration: ShapeDecoration(
-                                shape: StadiumBorder(),
-                                color: AppColors.dashedBorder,
+                child: ScrollConfiguration(
+                  behavior: ScrollConfiguration.of(context).copyWith(
+                    dragDevices: {
+                      PointerDeviceKind.touch,
+                      PointerDeviceKind.mouse,
+                    },
+                  ),
+                  child: ListView(
+                    controller: scrollController,
+                    padding: UIHelpers.sMediumHPadding,
+                    children: [
+                      Column(
+                        key: _alwaysVisibleContentKey,
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          UIHelpers.xSmallVSpace,
+                          Center(
+                            child: SizedBox(
+                              width: 96,
+                              height: 6,
+                              child: DecoratedBox(
+                                decoration: ShapeDecoration(
+                                  shape: StadiumBorder(),
+                                  color: AppColors.dashedBorder,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        UIHelpers.largeVSpace,
-                        ...widget.alwaysVisibleChildren,
-                      ],
-                    ),
-                    Column(
-                      key: _expandedOnlyContentKey,
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: widget.expandedOnlyChildren,
-                    ),
-                  ],
+                          UIHelpers.largeVSpace,
+                          ...widget.alwaysVisibleChildren,
+                        ],
+                      ),
+                      Column(
+                        key: _expandedOnlyContentKey,
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: widget.expandedOnlyChildren,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SafeArea(

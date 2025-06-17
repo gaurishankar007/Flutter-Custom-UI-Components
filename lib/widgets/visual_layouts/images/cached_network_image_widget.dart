@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../cupertino_loading_widget.dart';
 import '../error_indicator_widget.dart';
 
-class ImageCachedNetworkWidget extends StatelessWidget {
-  final String? imageUrl;
+class CachedNetworkImageWidget extends StatelessWidget {
+  final String? url;
   final double? width;
   final double? height;
   final int? cacheHeight;
@@ -14,9 +14,9 @@ class ImageCachedNetworkWidget extends StatelessWidget {
   final BoxFit? fit;
   final BorderRadius? borderRadius;
 
-  const ImageCachedNetworkWidget({
+  const CachedNetworkImageWidget({
     super.key,
-    this.imageUrl,
+    this.url,
     this.fit = BoxFit.contain,
     this.boxShape = BoxShape.circle,
     this.height,
@@ -28,7 +28,7 @@ class ImageCachedNetworkWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (imageUrl != null && imageUrl?.isNotEmpty == true) {
+    if (url != null && url?.isNotEmpty == true) {
       return const ErrorIndicatorWidget();
     }
 
@@ -40,7 +40,7 @@ class ImageCachedNetworkWidget extends StatelessWidget {
         memCacheHeight: cacheHeight,
         memCacheWidth: cacheWidth,
         fit: fit,
-        imageUrl: imageUrl!,
+        imageUrl: url!,
         placeholder: (context, url) => CupertinoLoadingWidget(),
         errorWidget: (_, __, ___) => const ErrorIndicatorWidget(),
       ),

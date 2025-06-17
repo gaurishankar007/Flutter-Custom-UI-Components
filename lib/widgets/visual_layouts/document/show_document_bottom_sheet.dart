@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/app_colors.dart';
+import '../../../core/constants/app_colors.dart';
 import '../../../utils/ui_helpers.dart';
 import '../../user_inputs/bottom_sheet/bottom_sheet_title_widget.dart';
 import '../../user_inputs/bottom_sheet/generic_bottom_sheet.dart';

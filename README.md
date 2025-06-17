@@ -76,11 +76,16 @@ Enhance your UI with foundational layout elements:
 - **Text**
   - ✅ **Text Type**
   - ✅ **Text**
+- **Youtube**
+  - ✅ **Youtube Video Player**
+  - ✅ **Youtube Thumbnail Image**
 - ✅ **Cupertino Loading**
+- ✅ **Error Icon**
 - ✅ **Error Indicator**
 - ✅ **Keyboard Space**
 - ✅ **Loading Circle**
 - ✅ **Shimmer**
+- ✅ **Slider**
 - ✅ **Stopwatch**
 
 ---
@@ -101,6 +106,9 @@ Intuitive and interactive components for user input:
   - ✅ **Drop Down Button**
   - ✅ **Drop Down Menu**
   - ✅ **Drop Down Search Field**
+  - ✅ **Drop Down Text Field**
+- **Overlay**
+  - ✅ **Overlay Menu**
 - **Form**
   - ✅ **OTP Field**
   - ✅ **Text Field**

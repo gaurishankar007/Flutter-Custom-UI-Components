@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../utils/app_colors.dart';
+import '../../../../core/constants/app_colors.dart';
 import '../../../../utils/ui_helpers.dart';
 import '../../../painters/dotted_container_widget.dart';
 import '../../text/text_widget.dart';

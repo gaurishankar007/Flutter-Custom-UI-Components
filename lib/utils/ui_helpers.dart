@@ -93,6 +93,11 @@ class UIHelpers {
   static final xLargeAllPadding = EdgeInsets.all(Space.xLarge.value);
 
   //<========== Horizontal Padding ==========>
+  /// Horizontal Padding = 8
+  static final xSmallHPadding = EdgeInsets.symmetric(
+    horizontal: Space.xSmall.value,
+  );
+
   /// Horizontal Padding = 12
   static final smallHPadding = EdgeInsets.symmetric(
     horizontal: Space.small.value,

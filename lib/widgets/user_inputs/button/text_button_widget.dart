@@ -12,7 +12,6 @@ class TextButtonWidget extends StatelessWidget {
   final EdgeInsets? padding;
   final VisualDensity? visualDensity;
   final double? elevation;
-  final OutlinedBorder? shape;
   final bool expanded;
   final bool disabled;
   final bool loading;
@@ -27,7 +26,6 @@ class TextButtonWidget extends StatelessWidget {
     this.padding,
     this.visualDensity,
     this.elevation,
-    this.shape,
     this.expanded = false,
     this.disabled = false,
     this.loading = false,
@@ -40,27 +38,16 @@ class TextButtonWidget extends StatelessWidget {
       style: TextButton.styleFrom(
         foregroundColor: foregroundColor,
         padding: padding ?? const EdgeInsets.symmetric(horizontal: 4),
-        visualDensity:
-            visualDensity ?? const VisualDensity(horizontal: -4, vertical: -4),
-        shape: shape ??
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        visualDensity: visualDensity,
         elevation: elevation,
       ),
-      child: TextWidget(
-        text,
-        textType: textType,
-        fontWeight: textFontWeight,
-      ),
+      child: TextWidget(text, textType: textType, fontWeight: textFontWeight),
     );
 
     if (loading) child = LoadingCircleWidget.small(color: Colors.white);
 
     if (expanded) {
-      child = SizedBox(
-        height: 50,
-        width: double.maxFinite,
-        child: child,
-      );
+      child = SizedBox(height: 50, width: double.maxFinite, child: child);
     }
 
     return child;

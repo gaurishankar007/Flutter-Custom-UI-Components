@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../../utils/app_colors.dart';
+import '../../core/constants/app_colors.dart';
 
 class CurveContainerWidget extends StatelessWidget {
   final double? height;
