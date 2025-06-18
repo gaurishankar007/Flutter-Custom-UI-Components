@@ -2,19 +2,20 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../core/constants/app_colors.dart';
+import '../../../../../core/constants/app_colors.dart';
 import '../../../utils/ui_helpers.dart';
 import '../../visual_layouts/loading_circle_widget.dart';
 import '../../visual_layouts/text/text_widget.dart';
 
 class SecondaryButtonWidget extends HookWidget {
   final Function()? onTap;
-  final String? text;
-  final FontWeight? textFontWeight;
+  final String? label;
+  final FontWeight? textWeight;
   final Widget? icon;
   final bool isPrefixIcon;
   final double? height;
   final double? width;
+  final double? spacing;
   final bool expandWidth;
   final bool isLoadable;
   final bool disabled;
@@ -22,12 +23,13 @@ class SecondaryButtonWidget extends HookWidget {
   const SecondaryButtonWidget({
     super.key,
     this.onTap,
-    this.text,
-    this.textFontWeight,
+    this.label,
+    this.textWeight,
     this.icon,
     this.isPrefixIcon = true,
     this.height,
     this.width,
+    this.spacing,
     this.expandWidth = false,
     this.isLoadable = false,
     this.disabled = false,
@@ -65,7 +67,7 @@ class SecondaryButtonWidget extends HookWidget {
             } else if (states.contains(WidgetState.hovered)) {
               return AppColors.primary;
             }
-            return AppColors.black70;
+            return AppColors.black;
           }),
           side: WidgetStateBorderSide.resolveWith((states) {
             if (states.contains(WidgetState.disabled)) {
@@ -85,7 +87,7 @@ class SecondaryButtonWidget extends HookWidget {
         ),
         child: ValueListenableBuilder(
           valueListenable: loadingNotifier,
-          builder: (_, loading, __) => _buildChild(loading),
+          builder: (_, loading, _) => _buildChild(loading),
         ),
       ),
     );
@@ -93,9 +95,12 @@ class SecondaryButtonWidget extends HookWidget {
 
   EdgeInsets _getPadding() {
     double verticalPadding = kIsWeb ? 20 : 16;
+    if (label == null && icon != null) {
+      return EdgeInsets.symmetric(vertical: verticalPadding, horizontal: 16);
+    }
+
     double leftPadding = isPrefixIcon && icon != null ? 16 : 24;
     double rightPadding = !isPrefixIcon && icon != null ? 16 : 24;
-
     return EdgeInsets.only(
       top: verticalPadding,
       bottom: verticalPadding,
@@ -106,14 +111,18 @@ class SecondaryButtonWidget extends HookWidget {
 
   Widget _buildChild(bool loading) {
     if (loading) return LoadingCircleWidget.small(AppColors.primary);
-    if (text != null && icon == null) return TextWidget(text!);
-    if (text != null && icon != null) {
+
+    if (label != null) {
+      final textWidget = TextWidget(label!, textAlign: TextAlign.center);
+
+      if (icon == null) return textWidget;
       return Row(
         mainAxisSize: MainAxisSize.min,
+        spacing: spacing ?? 4,
         children: [
-          if (isPrefixIcon) ...[icon!, UIHelpers.xSmallHSpace],
-          TextWidget(text!),
-          if (!isPrefixIcon) ...[UIHelpers.xSmallHSpace, icon!],
+          if (isPrefixIcon) icon!,
+          Flexible(child: textWidget),
+          if (!isPrefixIcon) icon!,
         ],
       );
     }
