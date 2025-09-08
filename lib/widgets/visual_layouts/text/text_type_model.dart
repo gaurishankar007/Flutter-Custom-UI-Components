@@ -1,4 +1,4 @@
-part of 'text_widget.dart';
+part of 'base_text.dart';
 
 enum TextType {
   caption(10),

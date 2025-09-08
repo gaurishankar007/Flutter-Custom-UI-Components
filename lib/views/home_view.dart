@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/clippers/half_circle_widget.dart';
+import '../widgets/clippers/half_circle.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

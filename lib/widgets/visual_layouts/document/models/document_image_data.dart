@@ -10,7 +10,7 @@ class ImageNetworkData extends DocumentData {
     BoxFit? fit,
     BorderRadius? borderRadius,
   }) {
-    return CachedNetworkImageWidget(
+    return BaseCachedNetworkImage(
       url: url,
       height: height,
       width: width,
@@ -30,7 +30,7 @@ class ImageFileData extends DocumentData {
     BoxFit? fit,
     BorderRadius? borderRadius,
   }) {
-    return FileImageWidget(
+    return BaseFileImage(
       file: file!,
       height: height,
       width: width,
@@ -51,10 +51,10 @@ class ImageMemoryData extends DocumentData {
     BorderRadius? borderRadius,
   }) {
     if (uint8List?.isNotEmpty != true) {
-      return ErrorIndicatorWidget(dimension: height, iconSize: 64);
+      return ErrorIndicator(dimension: height, iconSize: 64);
     }
 
-    return MemoryImageWidget(
+    return BaseMemoryImage(
       uint8List: uint8List!,
       height: height,
       width: width,

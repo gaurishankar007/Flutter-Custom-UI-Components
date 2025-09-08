@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../../utils/ui_helpers.dart';
-import '../../user_inputs/bottom_sheet/bottom_sheet_title_widget.dart';
+import '../../user_inputs/bottom_sheet/bottom_sheet_title.dart';
 import '../../user_inputs/bottom_sheet/generic_bottom_sheet.dart';
 import 'models/document_data.dart';
 
@@ -17,7 +17,7 @@ showDocumentBottomSheet(
   child: Column(
     mainAxisSize: MainAxisSize.min,
     children: [
-      BottomSheetTitleWidget(title: title ?? "Document"),
+      BottomSheetTitle(title: title ?? "Document"),
       Container(
         width: double.maxFinite,
         padding: UIHelpers.sMediumAllPadding,

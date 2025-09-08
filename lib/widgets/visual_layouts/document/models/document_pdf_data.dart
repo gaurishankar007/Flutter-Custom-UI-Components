@@ -1,9 +1,7 @@
 part of 'document_data.dart';
 
 class PDFMemoryData extends DocumentData {
-  PDFMemoryData({
-    required Uint8List uint8List,
-  }) : super(uint8List: uint8List);
+  PDFMemoryData({required Uint8List uint8List}) : super(uint8List: uint8List);
 
   @override
   Widget build({
@@ -13,10 +11,10 @@ class PDFMemoryData extends DocumentData {
     BorderRadius? borderRadius,
   }) {
     if (uint8List?.isNotEmpty != true) {
-      return ErrorIndicatorWidget(dimension: height, iconSize: 64);
+      return ErrorIndicator(dimension: height, iconSize: 64);
     }
 
-    return PDFMemoryWidget(
+    return PDFMemory(
       pdfData: uint8List!,
       height: height,
       width: width,
@@ -26,9 +24,7 @@ class PDFMemoryData extends DocumentData {
 }
 
 class PDFFileData extends DocumentData {
-  PDFFileData({
-    required File file,
-  }) : super(file: file);
+  PDFFileData({required File file}) : super(file: file);
 
   @override
   Widget build({
@@ -38,10 +34,10 @@ class PDFFileData extends DocumentData {
     BorderRadius? borderRadius,
   }) {
     if (file?.path.isNotEmpty != true) {
-      return ErrorIndicatorWidget(dimension: height, iconSize: 64);
+      return ErrorIndicator(dimension: height, iconSize: 64);
     }
 
-    return PDFFileWidget(
+    return PDFFile(
       file: file!,
       height: height,
       width: width,
