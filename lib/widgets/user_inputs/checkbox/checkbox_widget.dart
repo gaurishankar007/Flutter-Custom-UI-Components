@@ -5,29 +5,33 @@ import '../../../../../core/constants/app_colors.dart';
 import '../../../utils/ui_helpers.dart';
 import '../../visual_layouts/text/text_widget.dart';
 
+/// A customizable checkbox with optional label and tristate support.
+/// Disabled if [onChanged] is null. Scaled for better visibility.
 class CheckboxWidget extends HookWidget {
   final bool? value;
+  final bool tristate;
   final Function(bool?)? onChanged;
   final String? label;
 
-  const CheckboxWidget({super.key, this.value, this.onChanged, this.label});
+  const CheckboxWidget({
+    super.key,
+    this.value = false,
+    this.tristate = false,
+    this.onChanged,
+    this.label,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final checkboxState = useState(value);
-    final callback = useCallback((bool? value) {
-      checkboxState.value = value;
-      onChanged?.call(value);
-    });
     final isDisabled = onChanged == null;
 
     Widget child = UnconstrainedBox(
       child: Transform.scale(
         scale: 1.3,
         child: Checkbox(
-          value: checkboxState.value,
-          tristate: true,
-          onChanged: isDisabled ? null : callback,
+          value: value,
+          tristate: tristate,
+          onChanged: isDisabled ? null : onChanged,
         ),
       ),
     );

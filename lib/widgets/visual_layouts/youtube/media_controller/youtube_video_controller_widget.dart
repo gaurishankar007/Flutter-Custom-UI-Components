@@ -45,9 +45,6 @@ class _YoutubeVideoControllerWidgetState
   /// The duration in seconds of the currently playing video
   double _duration = 0;
 
-  /// A number between 0 and 1 that specifies the percentage of the video loaded.
-  double _buffered = 0;
-
   @override
   void initState() {
     super.initState();
@@ -143,25 +140,21 @@ class _YoutubeVideoControllerWidgetState
 
   /// Updates the player media values periodically
   void _listenControllerChanges() {
-    _updateTimer = Timer.periodic(const Duration(milliseconds: 100), (_) async {
-      if (!context.mounted) return;
+    _updateTimer = Timer.periodic(const Duration(milliseconds: 500), (_) async {
+      try {
+        if (!context.mounted) return;
+        if (_duration == 0) _duration = await _controller.duration;
 
-      _buffered = await _controller.videoLoadedFraction;
-      _bufferedNotifier.value = _buffered;
-
-      final playerState = await _controller.playerState;
-      final isPlaying = playerState == PlayerState.playing;
-
-      _playingNotifier.value = isPlaying;
-      _currentTime = await _controller.currentTime;
-      _duration = await _controller.duration;
-      if (isPlaying) _updatePosition();
+        _bufferedNotifier.value = await _controller.videoLoadedFraction;
+        _currentTime = await _controller.currentTime;
+        if (_playingNotifier.value) _updatePosition();
+      } catch (_) {}
     });
   }
 
   /// Updates elapsed time
   void _updatePosition() {
-    if (!context.mounted) return;
+    if (!context.mounted || _duration == 0 || _currentTime == 0) return;
 
     // A number between 0 and 1 that specifies the percentage of time elapsed.
     final elapsedValue = (_currentTime / _duration).clamp(0, 1).toDouble();
@@ -190,9 +183,10 @@ class _YoutubeVideoControllerWidgetState
   }
 
   Future<void> _onPlayPause() async {
-    final playerState = await _controller.playerState;
-    final isPlaying = playerState == PlayerState.playing;
-    isPlaying ? await _controller.pauseVideo() : await _controller.playVideo();
+    _playingNotifier.value
+        ? await _controller.pauseVideo()
+        : await _controller.playVideo();
+    _playingNotifier.value = !_playingNotifier.value;
   }
 
   Future<void> _onVolumeChanged(double value) async {

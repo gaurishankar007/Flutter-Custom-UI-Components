@@ -37,19 +37,7 @@ class _YoutubePlayerIframeWidgetState extends State<YoutubePlayerIframeWidget> {
     super.initState();
 
     // Initialize the controller with the video Id
-    _videoId = YoutubePlayerController.convertUrlToId(widget.videoUrl) ?? "";
-    _controller = YoutubePlayerController.fromVideoId(
-      videoId: _videoId,
-      params: YoutubePlayerParams(
-        strictRelatedVideos: true,
-        loop: true,
-        showVideoAnnotations: false,
-        showControls: false,
-        enableCaption: false,
-        pointerEvents: PointerEvents.none,
-      ),
-      autoPlay: true,
-    );
+    _initializeController();
     // Notify when the controller is ready
     widget.onControllerReady?.call(_controller);
     // Hide the controller after a delay
@@ -90,15 +78,33 @@ class _YoutubePlayerIframeWidgetState extends State<YoutubePlayerIframeWidget> {
         ],
       );
     }
+
     return Listener(
       behavior: HitTestBehavior.translucent,
       onPointerDown: (event) => _showController(),
       child: Stack(
+        alignment: Alignment.center,
         children: [
           IgnorePointer(child: videoPlayerWidget),
           AspectRatio(aspectRatio: widget.aspectRatio, child: controllerWidget),
         ],
       ),
+    );
+  }
+
+  void _initializeController() async {
+    _videoId = YoutubePlayerController.convertUrlToId(widget.videoUrl) ?? "";
+    _controller = YoutubePlayerController.fromVideoId(
+      videoId: _videoId,
+      params: YoutubePlayerParams(
+        strictRelatedVideos: true,
+        loop: true,
+        showVideoAnnotations: false,
+        showControls: false,
+        enableCaption: false,
+        pointerEvents: PointerEvents.none,
+      ),
+      autoPlay: true,
     );
   }
 
