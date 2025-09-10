@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/ui_helpers.dart';
-import '../../visual_layouts/text/base_text.dart';
+import '../../visual_layouts/base_text.dart';
 
 class OverlayButton extends StatelessWidget {
   final String label;

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../utils/screen_util/screen_util.dart';
 import '../../../utils/ui_helpers.dart';
-import '../text/base_text.dart';
+import '../base_text.dart';
 
 /// A flexible, reusable widget that displays a draggable bottom sheet with dynamic sizing.
 ///

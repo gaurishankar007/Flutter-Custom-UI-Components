@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/app_colors.dart';
 import '../../../utils/ui_helpers.dart';
-import '../../visual_layouts/text/base_text.dart';
+import '../../visual_layouts/base_text.dart';
 import '../form/base_text_field.dart';
 import '../overlay/overlay_decoration.dart';
 

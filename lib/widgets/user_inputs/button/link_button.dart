@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../core/constants/app_colors.dart';
-import '../../visual_layouts/text/base_text.dart';
+import '../../visual_layouts/base_text.dart';
 
 class LinkButton extends HookWidget {
   final Function() onTap;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../visual_layouts/text/base_text.dart';
+import '../../visual_layouts/base_text.dart';
 
 /// A dropdown menu widget that provides a flexible and customizable way to select an item from a list.
 ///

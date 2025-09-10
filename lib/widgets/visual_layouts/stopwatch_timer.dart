@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'text/base_text.dart';
+import 'base_text.dart';
 
 extension DurationExtension on Duration {
   /// Returns the duration in string format HH:MM:SS.

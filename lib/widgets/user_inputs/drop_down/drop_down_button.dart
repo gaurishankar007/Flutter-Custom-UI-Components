@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../visual_layouts/text/base_text.dart';
+import '../../visual_layouts/base_text.dart';
 
 /// A dropdown button widget that allows users to select an item from a list of options.
 ///

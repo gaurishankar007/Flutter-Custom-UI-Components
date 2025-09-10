@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../utils/ui_helpers.dart';
 import '../../../user_inputs/bottom_sheet/generic_bottom_sheet.dart';
-import '../../text/base_text.dart';
+import '../../base_text.dart';
 import '../models/document_type.dart';
 import 'document_upload_bottom_sheet.dart';
 import 'upload_container.dart';

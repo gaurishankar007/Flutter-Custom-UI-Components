@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../core/constants/app_colors.dart';
 import '../../../utils/ui_helpers.dart';
-import '../../visual_layouts/text/base_text.dart';
+import '../../visual_layouts/base_text.dart';
 
 /// A customizable checkbox with optional label and tristate support.
 /// Disabled if [onChanged] is null. Scaled for better visibility.

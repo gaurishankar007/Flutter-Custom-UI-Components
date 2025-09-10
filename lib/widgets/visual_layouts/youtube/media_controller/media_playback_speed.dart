@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
-import '../../text/base_text.dart';
+import '../../base_text.dart';
 
 class MediaPlaybackSpeed extends StatelessWidget {
   final ValueNotifier<double> playbackRateNotifier;

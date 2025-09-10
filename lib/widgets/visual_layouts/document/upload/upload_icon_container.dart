@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../utils/ui_helpers.dart';
-import '../../text/base_text.dart';
+import '../../base_text.dart';
 
 class UploadIconContainer extends StatelessWidget {
   final IconData iconData;

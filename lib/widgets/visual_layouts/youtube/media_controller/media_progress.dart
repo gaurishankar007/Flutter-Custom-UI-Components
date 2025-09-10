@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../utils/extensions/duration_extension.dart';
-import '../../text/base_text.dart';
+import '../../base_text.dart';
 
 class MediaProgress extends StatelessWidget {
   final int positionInSeconds;

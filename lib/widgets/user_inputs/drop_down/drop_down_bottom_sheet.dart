@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../visual_layouts/text/base_text.dart';
+import '../../visual_layouts/base_text.dart';
 import '../bottom_sheet/bottom_sheet_title.dart';
 import '../bottom_sheet/generic_bottom_sheet.dart';
 import '../form/base_text_field.dart';

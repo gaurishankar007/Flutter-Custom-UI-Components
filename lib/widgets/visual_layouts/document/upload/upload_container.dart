@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../utils/ui_helpers.dart';
 import '../../../painters/dotted_container.dart';
-import '../../text/base_text.dart';
+import '../../base_text.dart';
 
 class UploadContainer extends StatelessWidget {
   final int maxFileCount;
